@@ -4,6 +4,9 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { Button } from "react-bootstrap";
 import { useRef, useState } from "react";
 import AlertUi from "../UI/AlertUi";
+import { useDispatch } from "react-redux";
+import { TokenSliceActions } from "../../store/TokenSlice";
+import { useNavigate } from "react-router-dom";
 const AuthCard = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [passError, setPassError] = useState(false);
@@ -14,6 +17,8 @@ const AuthCard = () => {
   const emailRef = useRef();
   const passRef = useRef();
   const confirmPassRef = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const switchHandler = () => {
     resetAlerts();
     setIsLogin((prevState) => !prevState);
@@ -53,9 +58,9 @@ const AuthCard = () => {
         );
         if (response.ok) {
           const responseData = await response.json();
-          // dispatch(TokenSliceActions.LogIn(responseData.idToken));
+          dispatch(TokenSliceActions.LogIn(responseData.idToken));
           localStorage.setItem("token", responseData.idToken);
-          // navigate("/receive");
+          navigate("/inbox");
         }
         if (!response.ok) {
           if (response.status === 400) {

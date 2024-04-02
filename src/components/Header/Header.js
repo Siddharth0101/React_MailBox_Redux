@@ -10,11 +10,16 @@ import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useDispatch, useSelector } from "react-redux";
+import { TokenSliceActions } from "../../store/TokenSlice";
 const Header = () => {
+  const isLogin = useSelector((state) => state.LogInStore.isLogged);
+  console.log(isLogin);
   const [content, setContent] = useState("");
   const quillRef = useRef(null);
   const emailRef = useRef();
   const subjectRef = useRef();
+  const dispatch = useDispatch();
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -66,6 +71,10 @@ const Header = () => {
     }
     console.log(emailInput);
     console.log(subjectInput);
+  };
+  const logOutHandler = () => {
+    dispatch(TokenSliceActions.LogOut());
+    localStorage.removeItem("token");
   };
   return (
     <div>
@@ -148,24 +157,51 @@ const Header = () => {
           <Navbar.Brand style={{ color: "whitesmoke" }}>
             <h4>Mail Box</h4>
           </Navbar.Brand>
-          <div style={{ marginLeft: "1100px" }}>
-            <NavLink to="/auth">
-              <Button variant="outline-warning">Register</Button>
-              <Button variant="outline-warning" style={{ marginLeft: "20px" }}>
-                Log In
+          {!isLogin && (
+            <div>
+              <NavLink to="/auth">
+                <Button
+                  variant="outline-warning"
+                  style={{ marginRight: "10px" }}
+                >
+                  Register
+                </Button>
+                <Button
+                  variant="outline-warning"
+                  style={{ marginRight: "150px" }}
+                >
+                  Log In
+                </Button>
+              </NavLink>
+            </div>
+          )}
+          {isLogin && (
+            <div>
+              <NavLink to="/auth">
+                <Button
+                  variant="outline-danger"
+                  style={{ marginLeft: "1300px" }}
+                  onClick={logOutHandler}
+                >
+                  Log Out
+                </Button>
+              </NavLink>
+            </div>
+          )}
+          {isLogin && (
+            <div style={{ position: "fixed", bottom: 20, right: 20 }}>
+              <Button variant="outline-dark" onClick={handleShow}>
+                Compose
               </Button>
-            </NavLink>
-          </div>
-          <div style={{ position: "fixed", bottom: 20, right: 20 }}>
-            <Button variant="outline-dark" onClick={handleShow}>
-              Compose
-            </Button>
-          </div>
-          <Navbar.Toggle
-            aria-controls={`offcanvasNavbar-expand-${false}`}
-            onClick={toggleHandler}
-            className="bg-light"
-          />
+            </div>
+          )}
+          {isLogin && (
+            <Navbar.Toggle
+              aria-controls={`offcanvasNavbar-expand-${false}`}
+              onClick={toggleHandler}
+              className="bg-light"
+            />
+          )}
           {show && (
             <Navbar.Offcanvas
               show={show}
