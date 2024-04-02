@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -8,13 +8,58 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { NavLink, Outlet } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const Header = () => {
+  const [content, setContent] = useState("");
+  const quillRef = useRef(null);
+  const modules = {
+    toolbar: [
+      [{ header: "1" }, { header: "2" }, { font: [] }],
+      [{ size: [] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image", "video"],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "video",
+  ];
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   const toggleHandler = () => {
     setShow(!show);
+  };
+  const handleSend = () => {
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      const unprivilegedEditor =
+        quillRef.current.makeUnprivilegedEditor(editor);
+      const text = unprivilegedEditor.getText();
+      console.log(text);
+    }
   };
   return (
     <div>
@@ -27,9 +72,7 @@ const Header = () => {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Compose
-            </Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter">Title</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -61,13 +104,17 @@ const Header = () => {
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"
               >
-                <FloatingLabel controlId="floatingTextarea2" label="Comments">
-                  <Form.Control
-                    as="textarea"
-                    placeholder="Leave a comment here"
-                    style={{ height: "100px" }}
+                <div className="compose-container">
+                  <ReactQuill
+                    theme="snow"
+                    value={content}
+                    onChange={setContent}
+                    modules={modules}
+                    formats={formats}
+                    placeholder="Compose your email..."
+                    ref={quillRef}
                   />
-                </FloatingLabel>
+                </div>
               </Form.Group>
             </Form>
           </Modal.Body>
@@ -76,8 +123,8 @@ const Header = () => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
+            <Button variant="primary" onClick={handleSend}>
+              Save Changes(send)
             </Button>
           </Modal.Footer>
         </Modal>
