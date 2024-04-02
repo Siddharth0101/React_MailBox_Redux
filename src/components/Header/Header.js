@@ -13,6 +13,8 @@ import "react-quill/dist/quill.snow.css";
 const Header = () => {
   const [content, setContent] = useState("");
   const quillRef = useRef(null);
+  const emailRef = useRef();
+  const subjectRef = useRef();
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -53,6 +55,8 @@ const Header = () => {
     setShow(!show);
   };
   const handleSend = () => {
+    const emailInput = emailRef.current.value;
+    const subjectInput = subjectRef.current.value;
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       const unprivilegedEditor =
@@ -60,6 +64,8 @@ const Header = () => {
       const text = unprivilegedEditor.getText();
       console.log(text);
     }
+    console.log(emailInput);
+    console.log(subjectInput);
   };
   return (
     <div>
@@ -85,7 +91,11 @@ const Header = () => {
                   label="Email address"
                   className="mb-3"
                 >
-                  <Form.Control type="email" placeholder="name@example.com" />
+                  <Form.Control
+                    type="email"
+                    placeholder="name@example.com"
+                    ref={emailRef}
+                  />
                 </FloatingLabel>
               </Form.Group>
               <Form.Group
@@ -97,7 +107,11 @@ const Header = () => {
                   label="Subject"
                   className="mb-3"
                 >
-                  <Form.Control type="text" placeholder="name@example.com" />
+                  <Form.Control
+                    type="text"
+                    placeholder="name@example.com"
+                    ref={subjectRef}
+                  />
                 </FloatingLabel>
               </Form.Group>
               <Form.Group
