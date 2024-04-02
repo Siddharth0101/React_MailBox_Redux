@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
 import Authentication from "./pages/Authentication/Authentication";
 import Inbox from "./pages/Inbox/Inbox";
+import Compose from "./pages/Compose/Compose";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,8 +23,12 @@ function App() {
           element: <Authentication />,
         },
         {
-          path: "inbox",
+          path: "/inbox",
           element: <Inbox />,
+        },
+        {
+          path: "/compose",
+          element: <Compose />,
         },
       ],
     },
