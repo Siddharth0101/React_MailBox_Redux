@@ -1,12 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "react-bootstrap";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
 import Authentication from "./pages/Authentication/Authentication";
 import Inbox from "./pages/Inbox/Inbox";
-import Compose from "./pages/Compose/Compose";
+import Send from "./pages/Send/Send";
+import Draft from "./pages/Draft/Draft";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,8 +27,12 @@ function App() {
           element: <Inbox />,
         },
         {
-          path: "/compose",
-          element: <Compose />,
+          path: "send",
+          element: <Send />,
+        },
+        {
+          path: "/draft",
+          element: <Draft />,
         },
       ],
     },
