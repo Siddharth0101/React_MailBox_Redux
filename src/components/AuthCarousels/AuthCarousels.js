@@ -10,7 +10,7 @@ const AuthCarousels = () => {
         marginTop: "250px",
         marginBottom: "20px",
         marginRight: "190px",
-        maxHeight: "46vh",
+        maxHeight: "51.5vh",
         overflow: "hidden",
         borderRadius: "10px",
       }}
@@ -18,49 +18,20 @@ const AuthCarousels = () => {
       <Carousel>
         <Carousel.Item>
           <Figure>
-            <Figure.Image
-              width={400}
-              height={180}
-              alt="171x180"
-              src={imageCaro1}
-            />
+            <Figure.Image width={800} height={180} src={imageCaro1} />
           </Figure>
-
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
+          <Carousel.Caption></Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <Figure>
-            <Figure.Image
-              width={400}
-              height={180}
-              alt="171x180"
-              src={imageCaro1}
-            />
+            <Figure.Image width={800} height={180} src={imageCaro1} />
           </Figure>
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
+          <Carousel.Caption></Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <Figure>
-            <Figure.Image
-              width={400}
-              height={180}
-              alt="171x180"
-              src={imageCaro1}
-            />
+            <Figure.Image width={800} height={180} src={imageCaro1} />
           </Figure>
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
     </div>
