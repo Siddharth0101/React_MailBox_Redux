@@ -12,9 +12,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { TokenSliceActions } from "../../store/TokenSlice";
+import { DataSliceActions } from "../../store/DataSlice";
 const Header = () => {
   const isLogin = useSelector((state) => state.LogInStore.isLogged);
-  console.log(isLogin);
+  const userEmail = useSelector((state) => state.Data.userEmail);
+  const sendEmailFrom = useSelector((state) => state.Data.sendEmailFrom);
+  const sendEmailTo = useSelector((state) => state.Data.sendEmailTo);
+  const forDraft = useSelector((state) => state.Data.forDraft);
   const [content, setContent] = useState("");
   const quillRef = useRef(null);
   const emailRef = useRef();
@@ -66,15 +70,30 @@ const Header = () => {
       const editor = quillRef.current.getEditor();
       const unprivilegedEditor =
         quillRef.current.makeUnprivilegedEditor(editor);
-      const text = unprivilegedEditor.getText();
-      console.log(text);
+      const text = unprivilegedEditor.getText().trim();
+      const composedata = {
+        id: Math.random(),
+        forDraft: forDraft,
+        userEmail: userEmail,
+        sendEmailFrom: sendEmailFrom,
+        sendEmailTo: sendEmailTo,
+        Email: emailInput,
+        Subject: subjectInput,
+        Description: text,
+      };
+      dispatch(DataSliceActions.addItems(composedata));
     }
-    console.log(emailInput);
-    console.log(subjectInput);
+    dispatch(DataSliceActions.sendEmailFromUpdate(userEmail));
+    localStorage.setItem("sendEmailFrom", userEmail);
+    dispatch(DataSliceActions.sendEmailToUpdate(emailInput));
+    localStorage.setItem("sendEmailTo", emailInput);
   };
   const logOutHandler = () => {
     dispatch(TokenSliceActions.LogOut());
     localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("sendEmailFrom");
+    localStorage.removeItem("sendEmailTo");
   };
   return (
     <div>
@@ -87,7 +106,9 @@ const Header = () => {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">Title</Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Compose
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -143,13 +164,23 @@ const Header = () => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button
+              variant="outline-secondary"
+              onClick={handleClose}
+              style={{ marginRight: "50px", width: "300px" }}
+            >
               Close
             </Button>
-            <Button variant="primary" onClick={handleSend}>
-              Save Changes(send)
+            <Button
+              variant="outline-primary"
+              style={{ width: "300px", marginRight: "65px" }}
+            >
+              Save
             </Button>
           </Modal.Footer>
+          <Button variant="outline-success" onClick={handleSend}>
+            Send Mail
+          </Button>
         </Modal>
       </div>
       <Navbar key={true} expand={false} className="bg-dark mb-3 ">

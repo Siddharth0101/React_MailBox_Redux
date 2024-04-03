@@ -7,6 +7,7 @@ import AlertUi from "../UI/AlertUi";
 import { useDispatch } from "react-redux";
 import { TokenSliceActions } from "../../store/TokenSlice";
 import { useNavigate } from "react-router-dom";
+import { DataSliceActions } from "../../store/DataSlice";
 const AuthCard = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [passError, setPassError] = useState(false);
@@ -59,7 +60,9 @@ const AuthCard = () => {
         if (response.ok) {
           const responseData = await response.json();
           dispatch(TokenSliceActions.LogIn(responseData.idToken));
+          dispatch(DataSliceActions.userEmailUpdate(responseData.email));
           localStorage.setItem("token", responseData.idToken);
+          localStorage.setItem("userEmail", responseData.email);
           navigate("/inbox");
         }
         if (!response.ok) {

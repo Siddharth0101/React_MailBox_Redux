@@ -7,8 +7,12 @@ import Authentication from "./pages/Authentication/Authentication";
 import Inbox from "./pages/Inbox/Inbox";
 import Send from "./pages/Send/Send";
 import Draft from "./pages/Draft/Draft";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendRequest } from "./store/DataRequest";
 function App() {
+  const items = useSelector((state) => state.Data.items);
+  const dispatch = useDispatch();
   const router = createBrowserRouter([
     {
       path: "",
@@ -37,6 +41,9 @@ function App() {
       ],
     },
   ]);
+  useEffect(() => {
+    dispatch(sendRequest(items));
+  }, [items, dispatch]);
   return (
     <div>
       <RouterProvider router={router} />
