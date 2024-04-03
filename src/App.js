@@ -9,9 +9,11 @@ import Send from "./pages/Send/Send";
 import Draft from "./pages/Draft/Draft";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendRequest } from "./store/DataRequest";
+import { fetchData, sendRequest } from "./store/DataRequest";
+let isInitial = true;
 function App() {
   const items = useSelector((state) => state.Data.items);
+  const checkChanged = useSelector((state) => state.Data.changed);
   const dispatch = useDispatch();
   const router = createBrowserRouter([
     {
@@ -42,8 +44,18 @@ function App() {
     },
   ]);
   useEffect(() => {
-    dispatch(sendRequest(items));
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (checkChanged) {
+      dispatch(sendRequest(items));
+    }
   }, [items, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
   return (
     <div>
       <RouterProvider router={router} />

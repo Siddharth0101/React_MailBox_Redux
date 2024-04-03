@@ -6,7 +6,6 @@ const Send = () => {
   const userEmail = useSelector((state) => state.Data.userEmail);
   const sendEmailFrom = useSelector((state) => state.Data.sendEmailFrom);
   const sendEmailTo = useSelector((state) => state.Data.sendEmailTo);
-  console.log(items);
   return (
     <div>
       <Card
