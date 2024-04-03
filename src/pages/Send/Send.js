@@ -7,11 +7,6 @@ const Send = () => {
   const sendEmailFrom = useSelector((state) => state.Data.sendEmailFrom);
   const sendEmailTo = useSelector((state) => state.Data.sendEmailTo);
   console.log(items);
-  // items.map((items) => {
-  //   if (items.userEmail == items.sendEmailFrom) {
-  //     console.log(items);
-  //   }
-  // });
   return (
     <div>
       <Card
@@ -25,7 +20,19 @@ const Send = () => {
         <Card.Body>
           <Card.Title style={{ textAlign: "center" }}>Send</Card.Title>
           <Card.Text>
-            <ListUi />
+            {items.map((item) => {
+              if (item.userEmail == item.sendEmailFrom) {
+                return (
+                  <ListUi
+                    key={item.id}
+                    id={item.id}
+                    email={item.sendEmailTo}
+                    subject={item.Subject}
+                    description={item.Description}
+                  />
+                );
+              }
+            })}
           </Card.Text>
         </Card.Body>
       </Card>

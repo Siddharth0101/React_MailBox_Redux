@@ -87,6 +87,8 @@ const Header = () => {
     localStorage.setItem("sendEmailFrom", userEmail);
     dispatch(DataSliceActions.sendEmailToUpdate(emailInput));
     localStorage.setItem("sendEmailTo", emailInput);
+    handleClose();
+    setContent("");
   };
   const logOutHandler = () => {
     dispatch(TokenSliceActions.LogOut());
