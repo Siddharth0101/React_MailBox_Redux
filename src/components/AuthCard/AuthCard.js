@@ -60,9 +60,9 @@ const AuthCard = () => {
         if (response.ok) {
           const responseData = await response.json();
           dispatch(TokenSliceActions.LogIn(responseData.idToken));
-          dispatch(DataSliceActions.userEmailUpdate(responseData.email));
+          dispatch(DataSliceActions.currentEmailUpdate(responseData.email));
           localStorage.setItem("token", responseData.idToken);
-          localStorage.setItem("userEmail", responseData.email);
+          localStorage.setItem("currentEmail", responseData.email);
           navigate("/inbox");
         }
         if (!response.ok) {

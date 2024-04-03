@@ -3,11 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const DataSlice = createSlice({
   name: "data",
   initialState: {
-    forDraft: false,
     changed: false,
-    userEmail: localStorage.getItem("userEmail") || "",
-    sendEmailFrom: localStorage.getItem("sendEmailFrom") || "",
-    sendEmailTo: localStorage.getItem("sendEmailTo") || "",
+    userEmail: localStorage.getItem("currentEmail") || "",
     items: [],
   },
   reducers: {
@@ -18,17 +15,8 @@ const DataSlice = createSlice({
       state.items.push(action.payload);
       state.changed = true;
     },
-    userEmailUpdate(state, action) {
+    currentEmailUpdate(state, action) {
       state.userEmail = action.payload;
-    },
-    sendEmailFromUpdate(state, action) {
-      state.sendEmailFrom = action.payload;
-    },
-    sendEmailToUpdate(state, action) {
-      state.sendEmailTo = action.payload;
-    },
-    forDraftUpdate(state, action) {
-      state.forDraft = true;
     },
   },
 });

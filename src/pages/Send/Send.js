@@ -4,9 +4,6 @@ import ListUi from "../../components/ListUi/ListUi";
 const Send = () => {
   const items = useSelector((state) => state.Data.items);
   const userEmail = useSelector((state) => state.Data.userEmail);
-  const sendEmailFrom = useSelector((state) => state.Data.sendEmailFrom);
-  const sendEmailTo = useSelector((state) => state.Data.sendEmailTo);
-  console.log(items);
   return (
     <div>
       <Card
@@ -21,7 +18,7 @@ const Send = () => {
           <Card.Title style={{ textAlign: "center" }}>Send</Card.Title>
           <Card.Text>
             {items.map((item) => {
-              if (item.userEmail == item.sendEmailFrom) {
+              if (userEmail == item.sendEmailFrom) {
                 return (
                   <ListUi
                     key={item.id}

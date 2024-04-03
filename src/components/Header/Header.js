@@ -17,8 +17,6 @@ const Header = () => {
   const isLogin = useSelector((state) => state.LogInStore.isLogged);
   const userEmail = useSelector((state) => state.Data.userEmail);
   const sendEmailFrom = useSelector((state) => state.Data.sendEmailFrom);
-  const sendEmailTo = useSelector((state) => state.Data.sendEmailTo);
-  const forDraft = useSelector((state) => state.Data.forDraft);
   const [content, setContent] = useState("");
   const quillRef = useRef(null);
   const emailRef = useRef();
@@ -73,29 +71,22 @@ const Header = () => {
       const text = unprivilegedEditor.getText().trim();
       const composedata = {
         id: Math.random(),
-        forDraft: forDraft,
-        userEmail: userEmail,
-        sendEmailFrom: sendEmailFrom,
-        sendEmailTo: sendEmailTo,
+        forDraft: false,
+        sendEmailFrom: userEmail,
+        sendEmailTo: emailInput,
         Email: emailInput,
         Subject: subjectInput,
         Description: text,
       };
       dispatch(DataSliceActions.addItems(composedata));
     }
-    dispatch(DataSliceActions.sendEmailFromUpdate(userEmail));
-    localStorage.setItem("sendEmailFrom", userEmail);
-    dispatch(DataSliceActions.sendEmailToUpdate(emailInput));
-    localStorage.setItem("sendEmailTo", emailInput);
     handleClose();
     setContent("");
   };
   const logOutHandler = () => {
     dispatch(TokenSliceActions.LogOut());
     localStorage.removeItem("token");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("sendEmailFrom");
-    localStorage.removeItem("sendEmailTo");
+    localStorage.removeItem("currentEmail");
   };
   return (
     <div>
