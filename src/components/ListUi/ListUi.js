@@ -2,13 +2,13 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Accordion from "react-bootstrap/Accordion";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DataSliceActions } from "../../store/DataSlice";
 const ListUi = (props) => {
-  const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.Data.items);
   const handleItemClick = () => {
-    setClicked(true);
+    dispatch(DataSliceActions.clickedUpdate(props.id));
   };
   const handleDelete = (id) => {
     dispatch(DataSliceActions.deleteItem(id));
@@ -18,7 +18,7 @@ const ListUi = (props) => {
       <ListGroup variant="flush">
         <ListGroup.Item
           action
-          variant={clicked ? "success" : "dark"}
+          variant={props.variant}
           onClick={handleItemClick}
         >
           <Accordion variant="dark">

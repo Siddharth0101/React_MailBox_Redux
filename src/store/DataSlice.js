@@ -22,6 +22,15 @@ const DataSlice = createSlice({
       state.items = state.items.filter((item) => item.id !== action.payload);
       state.changed = true;
     },
+    clickedUpdate(state, action) {
+      state.items = state.items.map((item) => {
+        if (item.id === action.payload) {
+          return { ...item, clicked: "success" };
+        }
+        return item;
+      });
+      state.changed = true;
+    },
   },
 });
 export const DataSliceActions = DataSlice.actions;

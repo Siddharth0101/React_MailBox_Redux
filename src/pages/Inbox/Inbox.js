@@ -4,6 +4,7 @@ import ListUi from "../../components/ListUi/ListUi";
 const Inbox = () => {
   const items = useSelector((state) => state.Data.items);
   const userEmail = useSelector((state) => state.Data.userEmail);
+  console.log(userEmail);
   return (
     <div>
       <Card
@@ -23,6 +24,7 @@ const Inbox = () => {
                   <ListUi
                     key={item.id}
                     id={item.id}
+                    variant={item.clicked}
                     email={item.sendEmailTo}
                     subject={item.Subject}
                     description={item.Description}

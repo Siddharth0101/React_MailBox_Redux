@@ -23,6 +23,7 @@ const Send = () => {
                   <ListUi
                     key={item.id}
                     id={item.id}
+                    variant={item.clicked}
                     email={item.sendEmailTo}
                     subject={item.Subject}
                     description={item.Description}

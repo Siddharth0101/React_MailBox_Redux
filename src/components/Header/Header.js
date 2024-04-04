@@ -72,6 +72,7 @@ const Header = () => {
       const composedata = {
         id: Math.random(),
         forDraft: false,
+        clicked: "dark",
         sendEmailFrom: userEmail,
         sendEmailTo: emailInput,
         Email: emailInput,
@@ -94,6 +95,7 @@ const Header = () => {
       const composedata = {
         id: Math.random(),
         forDraft: true,
+        clicked: "dark",
         sendEmailFrom: userEmail,
         sendEmailTo: emailInput,
         Email: emailInput,
