@@ -41,7 +41,7 @@ const ListUi = (props) => {
                         variant="outline-danger"
                         onClick={() => handleDelete(props.id)}
                       >
-                        Delete
+                        <strong> Delete</strong>
                       </Button>
                     </Col>
                   </Row>

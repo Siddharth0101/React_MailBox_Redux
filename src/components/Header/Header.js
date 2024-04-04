@@ -273,8 +273,11 @@ const Header = () => {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title
+                  style={{ textAlign: "center" }}
                   id={`offcanvasNavbarLabel-expand-${false}`}
-                ></Offcanvas.Title>
+                >
+                  <strong>Actions</strong>
+                </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
