@@ -152,7 +152,7 @@ const AuthCard = () => {
       <Card style={{ width: "40rem", height: "450px" }}>
         <Card.Body>
           <Card.Title style={{ textAlign: "center" }}>
-            {isLogin ? "LogIn" : "Register"}
+            {isLogin ? <strong>LogIn</strong> : <strong> Register</strong>}
           </Card.Title>
           <Card.Text>
             <Form onSubmit={submitHandler}>
@@ -263,7 +263,11 @@ const AuthCard = () => {
                   }}
                   onClick={dismissAlerts}
                 >
-                  {isLogin ? "LogIn" : "Register"}
+                  {isLogin ? (
+                    <strong>LogIn</strong>
+                  ) : (
+                    <strong> Register</strong>
+                  )}
                 </Button>
                 <Button
                   style={{
@@ -280,7 +284,11 @@ const AuthCard = () => {
                   onClick={switchHandler}
                   variant="outline-secondary"
                 >
-                  {!isLogin ? "LogIn" : "Register"}
+                  {!isLogin ? (
+                    <strong>LogIn</strong>
+                  ) : (
+                    <strong> Register</strong>
+                  )}
                 </Button>
               </div>
             </Form>
@@ -293,7 +301,7 @@ const AuthCard = () => {
               style={{ width: "638px" }}
               onClick={handleForgot}
             >
-              Forgot Passwrd?
+              <strong> Forgot Passwrd?</strong>
             </Button>
           </div>
         )}

@@ -203,7 +203,9 @@ const Header = () => {
       <Navbar key={true} expand={false} className="bg-dark mb-3 ">
         <Container fluid>
           <Navbar.Brand style={{ color: "whitesmoke" }}>
-            <h4>Mail Box</h4>
+            <h4>
+              <strong>Mail Box</strong>
+            </h4>
           </Navbar.Brand>
           {!isLogin && (
             <div>
@@ -212,13 +214,13 @@ const Header = () => {
                   variant="outline-warning"
                   style={{ marginRight: "10px" }}
                 >
-                  Register
+                  <strong> Register</strong>
                 </Button>
                 <Button
                   variant="outline-warning"
                   style={{ marginRight: "150px" }}
                 >
-                  Log In
+                  <strong> Log In</strong>
                 </Button>
               </NavLink>
             </div>
@@ -231,7 +233,7 @@ const Header = () => {
                   style={{ marginLeft: "1300px" }}
                   onClick={logOutHandler}
                 >
-                  Log Out
+                  <strong> Log Out</strong>
                 </Button>
               </NavLink>
             </div>
@@ -249,7 +251,7 @@ const Header = () => {
                 onClick={handleShow}
                 style={{ width: "200px" }}
               >
-                Compose
+                <strong> Compose</strong>
               </Button>
             </div>
           )}

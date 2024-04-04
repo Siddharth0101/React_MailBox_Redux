@@ -21,7 +21,9 @@ const Send = () => {
         }}
       >
         <Card.Body>
-          <Card.Title style={{ textAlign: "center" }}>Send</Card.Title>
+          <Card.Title style={{ textAlign: "center" }}>
+            <strong>Send</strong>
+          </Card.Title>
           <Card.Text>
             {items.map((item) => {
               if (userEmail == item.sendEmailFrom && item.forDraft == false) {

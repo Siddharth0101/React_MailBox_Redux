@@ -22,7 +22,9 @@ const Inbox = () => {
         }}
       >
         <Card.Body>
-          <Card.Title style={{ textAlign: "center" }}>Inbox</Card.Title>
+          <Card.Title style={{ textAlign: "center" }}>
+            <strong>Inbox</strong>
+          </Card.Title>
           <Card.Text>
             {items.map((item) => {
               if (userEmail === item.sendEmailTo && item.forDraft == false) {
@@ -31,7 +33,7 @@ const Inbox = () => {
                     key={item.id}
                     id={item.id}
                     variant={item.clicked}
-                    email={item.sendEmailTo}
+                    email={item.sendEmailFrom}
                     subject={item.Subject}
                     description={item.Description}
                   />
