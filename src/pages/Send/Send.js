@@ -18,7 +18,7 @@ const Send = () => {
           <Card.Title style={{ textAlign: "center" }}>Send</Card.Title>
           <Card.Text>
             {items.map((item) => {
-              if (userEmail == item.sendEmailFrom) {
+              if (userEmail == item.sendEmailFrom && item.forDraft == false) {
                 return (
                   <ListUi
                     key={item.id}

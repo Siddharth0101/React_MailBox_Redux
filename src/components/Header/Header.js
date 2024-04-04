@@ -83,6 +83,28 @@ const Header = () => {
     handleClose();
     setContent("");
   };
+  const saveDraft = () => {
+    const emailInput = emailRef.current.value;
+    const subjectInput = subjectRef.current.value;
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      const unprivilegedEditor =
+        quillRef.current.makeUnprivilegedEditor(editor);
+      const text = unprivilegedEditor.getText().trim();
+      const composedata = {
+        id: Math.random(),
+        forDraft: true,
+        sendEmailFrom: userEmail,
+        sendEmailTo: emailInput,
+        Email: emailInput,
+        Subject: subjectInput,
+        Description: text,
+      };
+      dispatch(DataSliceActions.addItems(composedata));
+    }
+    handleClose();
+    setContent("");
+  };
   const logOutHandler = () => {
     dispatch(TokenSliceActions.LogOut());
     localStorage.removeItem("token");
@@ -167,6 +189,7 @@ const Header = () => {
             <Button
               variant="outline-primary"
               style={{ width: "300px", marginRight: "65px" }}
+              onClick={saveDraft}
             >
               Save
             </Button>

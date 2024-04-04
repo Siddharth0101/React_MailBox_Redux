@@ -1,5 +1,10 @@
+import { useSelector } from "react-redux";
 import Card from "react-bootstrap/Card";
+import ListUi from "../../components/ListUi/ListUi";
 const Draft = () => {
+  const items = useSelector((state) => state.Data.items);
+  const userEmail = useSelector((state) => state.Data.userEmail);
+
   return (
     <div>
       <Card
@@ -13,8 +18,19 @@ const Draft = () => {
         <Card.Body>
           <Card.Title style={{ textAlign: "center" }}>Draft</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {items.map((item) => {
+              if (userEmail == item.sendEmailFrom && item.forDraft == true) {
+                return (
+                  <ListUi
+                    key={item.id}
+                    id={item.id}
+                    email={item.sendEmailTo}
+                    subject={item.Subject}
+                    description={item.Description}
+                  />
+                );
+              }
+            })}
           </Card.Text>
         </Card.Body>
       </Card>
