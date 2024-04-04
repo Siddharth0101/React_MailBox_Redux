@@ -121,6 +121,27 @@ const AuthCard = () => {
       resetAlerts();
     }, 3000);
   };
+  const handleForgot = (event) => {
+    const emailInput = emailRef.current.value;
+    event.preventDefault();
+    const response = fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAEAIKFl4-XhkZkQpxKtuzgY4XSSj0b-ME",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestType: "PASSWORD_RESET",
+          email: emailInput,
+        }),
+      }
+    );
+    if (response.ok) {
+    }
+    if (!response.ok) {
+    }
+  };
   return (
     <div
       style={{
@@ -267,7 +288,11 @@ const AuthCard = () => {
         </Card.Body>
         {isLogin && (
           <div>
-            <Button variant="outline-dark" style={{ width: "638px" }}>
+            <Button
+              variant="outline-dark"
+              style={{ width: "638px" }}
+              onClick={handleForgot}
+            >
               Forgot Passwrd?
             </Button>
           </div>

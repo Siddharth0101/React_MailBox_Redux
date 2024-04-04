@@ -1,7 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
-import imageCaro1 from "../../images/shield.jpg";
-import Image from "react-bootstrap/Image";
-import Row from "react-bootstrap/Row";
+import imageCaro1 from "../../images/RegisterImage/Email Phishing Hook.jpg";
+import imageCaro2 from "../../images/RegisterImage/shield.jpg";
 import Figure from "react-bootstrap/Figure";
 const AuthCarousels = () => {
   return (
@@ -24,14 +23,9 @@ const AuthCarousels = () => {
         </Carousel.Item>
         <Carousel.Item>
           <Figure>
-            <Figure.Image width={800} height={180} src={imageCaro1} />
+            <Figure.Image width={800} height={180} src={imageCaro2} />
           </Figure>
           <Carousel.Caption></Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <Figure>
-            <Figure.Image width={800} height={180} src={imageCaro1} />
-          </Figure>
         </Carousel.Item>
       </Carousel>
     </div>

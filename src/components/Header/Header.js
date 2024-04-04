@@ -16,7 +16,6 @@ import { DataSliceActions } from "../../store/DataSlice";
 const Header = () => {
   const isLogin = useSelector((state) => state.LogInStore.isLogged);
   const userEmail = useSelector((state) => state.Data.userEmail);
-  const sendEmailFrom = useSelector((state) => state.Data.sendEmailFrom);
   const [content, setContent] = useState("");
   const quillRef = useRef(null);
   const emailRef = useRef();
@@ -238,8 +237,18 @@ const Header = () => {
             </div>
           )}
           {isLogin && (
-            <div style={{ position: "fixed", bottom: 20, right: 20 }}>
-              <Button variant="outline-dark" onClick={handleShow}>
+            <div
+              style={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+              }}
+            >
+              <Button
+                variant="outline-dark"
+                onClick={handleShow}
+                style={{ width: "200px" }}
+              >
                 Compose
               </Button>
             </div>
@@ -258,11 +267,12 @@ const Header = () => {
               id={`offcanvasNavbar-expand-${false}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${false}`}
               placement="end"
+              className="bg-secondary"
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${false}`}>
-                  Mail
-                </Offcanvas.Title>
+                <Offcanvas.Title
+                  id={`offcanvasNavbarLabel-expand-${false}`}
+                ></Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">

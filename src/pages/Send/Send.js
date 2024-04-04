@@ -5,7 +5,13 @@ const Send = () => {
   const items = useSelector((state) => state.Data.items);
   const userEmail = useSelector((state) => state.Data.userEmail);
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#9575CD",
+        height: "91vh",
+        display: "flex",
+      }}
+    >
       <Card
         style={{
           width: "105rem",

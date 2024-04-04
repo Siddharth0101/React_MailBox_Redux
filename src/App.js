@@ -13,16 +13,17 @@ import { fetchData, sendRequest } from "./store/DataRequest";
 let isInitial = true;
 function App() {
   const items = useSelector((state) => state.Data.items);
+  const isLogin = useSelector((state) => state.LogInStore.isLogged);
   const checkChanged = useSelector((state) => state.Data.changed);
   const dispatch = useDispatch();
   const router = createBrowserRouter([
     {
-      path: "",
+      path: "/",
       element: <Header />,
       children: [
         {
-          path: "/home",
-          element: <Home />,
+          path: "/",
+          element: <div>{!isLogin && <Home />}</div>,
         },
         {
           path: "/auth",
@@ -30,15 +31,15 @@ function App() {
         },
         {
           path: "/inbox",
-          element: <Inbox />,
+          element: <div>{isLogin ? <Inbox /> : <Authentication />}</div>,
         },
         {
-          path: "send",
-          element: <Send />,
+          path: "/send",
+          element: <div>{isLogin ? <Send /> : <Authentication />}</div>,
         },
         {
           path: "/draft",
-          element: <Draft />,
+          element: <div>{isLogin ? <Draft /> : <Authentication />}</div>,
         },
       ],
     },

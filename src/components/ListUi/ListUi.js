@@ -14,7 +14,7 @@ const ListUi = (props) => {
     dispatch(DataSliceActions.deleteItem(id));
   };
   return (
-    <div>
+    <div style={{ marginBottom: "20px" }}>
       <ListGroup variant="flush">
         <ListGroup.Item
           action
@@ -25,17 +25,27 @@ const ListUi = (props) => {
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <Container>
-                  <Row>
-                    <Col>{props.email}</Col>
-                    <Col>{props.subject}</Col>
+                  <Row style={{ alignItems: "center" }}>
+                    <Col xs={6} md={4} style={{ padding: "8px" }}>
+                      <strong>Email:</strong> {props.email}
+                    </Col>
+                    <Col xs={6} md={4} style={{ padding: "8px" }}>
+                      <strong>Subject:</strong> {props.subject}
+                    </Col>
+                    <Col
+                      xs={12}
+                      md={4}
+                      style={{ padding: "8px", textAlign: "right" }}
+                    >
+                      <Button
+                        variant="outline-danger"
+                        onClick={() => handleDelete(props.id)}
+                      >
+                        Delete
+                      </Button>
+                    </Col>
                   </Row>
                 </Container>
-                <Button
-                  variant="outline-danger"
-                  onClick={() => handleDelete(props.id)}
-                >
-                  Delete
-                </Button>
               </Accordion.Header>
               <Accordion.Body>{props.description}</Accordion.Body>
             </Accordion.Item>

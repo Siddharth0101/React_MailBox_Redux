@@ -6,7 +6,13 @@ const Inbox = () => {
   const userEmail = useSelector((state) => state.Data.userEmail);
   console.log(userEmail);
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#9575CD",
+        height: "91vh",
+        display: "flex",
+      }}
+    >
       <Card
         style={{
           width: "105rem",
