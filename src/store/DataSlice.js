@@ -18,6 +18,10 @@ const DataSlice = createSlice({
     currentEmailUpdate(state, action) {
       state.userEmail = action.payload;
     },
+    deleteItem(state, action) {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.changed = true;
+    },
   },
 });
 export const DataSliceActions = DataSlice.actions;

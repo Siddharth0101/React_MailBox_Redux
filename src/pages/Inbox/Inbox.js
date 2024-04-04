@@ -18,8 +18,6 @@ const Inbox = () => {
           <Card.Title style={{ textAlign: "center" }}>Inbox</Card.Title>
           <Card.Text>
             {items.map((item) => {
-              console.log(userEmail);
-              // console.log(item.sendEmailTo);
               if (userEmail === item.sendEmailTo && item.forDraft == false) {
                 return (
                   <ListUi
